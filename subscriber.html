@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>What's App</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+  <script >
+  //FLOW7 subscriber.html 관제를 할 지역을 먼저 선정함.
+    let 도시 = prompt("관제할 도시를 입력하세요 ex) 대구시 , 서울시..");
+    let 지역구 = prompt("관제할 구를 입력하세요  ex) 북구, 수성구 ,  강남구, 마포구..");
+    
+    //FLOW8 SSE연결
+    //FLOW9는 server.js에 있습니다.
+    const testEventSource  = new EventSource(`http://localhost:8080/message/${도시}/${지역구}`);
+    //node에 도시, 지역구 정보를 전송해서 구독요청
+
+
+  //FLOW13 데이터전달확인
+    testEventSource.addEventListener('ServerPUSH',function(e)
+    {
+      console.log("psubscibe 한 채널로부터 메세지 도착 : ", e.data);
+    })
+
+</script>
+</body>
+</html>
